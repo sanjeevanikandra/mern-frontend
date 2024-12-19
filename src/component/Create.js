@@ -1,4 +1,5 @@
 import { React, useState } from 'react'
+import Feature from './Feature';
 
 function Create() {
   const [title, setTitle] = useState('');
@@ -8,7 +9,7 @@ function Create() {
 
     const todos = { title }
 
-    const response = await fetch('https://mern-ackend-1.onrender.com/', {
+    const response = await fetch('http://localhost:5000/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -17,7 +18,7 @@ function Create() {
 
     });
     const data = await response.json();
-    if (response) {
+    if (response.ok) {
       console.log('Data has been added', data);
       setTitle('');
       setError('');
@@ -39,8 +40,8 @@ function Create() {
           <input type="submit" value="Add" className="btn btn-primary" />
           <input type="reset" value="Reset" className="btn btn-danger" />
         </div>
-
       </form>
+      <Feature />
     </div>
   )
 }
